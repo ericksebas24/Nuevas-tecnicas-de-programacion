@@ -36,54 +36,54 @@
 /*
 DEBER
 */
-// class Persona{
-//     constructor(nombre, apellido, email, edad){
-//         this._nombre = nombre;
-//         this._apellido = apellido;
-//         this._email = email;
-//         this._edad = edad;
-//     }
-//     get nombre(){
-//         return this._nombre;
-//     }
+class Persona{
+    constructor(nombre, apellido, email, edad){
+        this._nombre = nombre;
+        this._apellido = apellido;
+        this._email = email;
+        this._edad = edad;
+    }
+    get nombre(){
+        return this._nombre;
+    }
 
-//     set nombre(nombre){
-//         this._nombre = nombre;
-//     }
+    set nombre(nombre){
+        this._nombre = nombre;
+    }
 
-//     get apellido(){
-//         return this._apellido;
-//     }
+    get apellido(){
+        return this._apellido;
+    }
 
-//     set apellido(apellido){
-//         this._apellido = apellido;
-//     }
+    set apellido(apellido){
+        this._apellido = apellido;
+    }
 
-//     get email(){
-//         return this._email;
-//     }
+    get email(){
+        return this._email;
+    }
 
-//     set email(email){
-//         this._email = email;
-//     }
+    set email(email){
+        this._email = email;
+    }
 
-//     get edad(){
-//         return this._edad;
-//     }
+    get edad(){
+        return this._edad;
+    }
     
-//     set edad(edad){
-//         this._edad = edad;
-//     }
-// }
+    set edad(edad){
+        this._edad = edad;
+    }
+}
 
-// let edward = new Persona('Erick', 'Fernández', 'ericksebas13jer@gmail.com', 21);
+let edward = new Persona('Erick', 'Fernández', 'ericksebas13jer@gmail.com', 21);
 
-// console.log(edward);
+console.log(edward);
 
-// console.log(edward.nombre);
+console.log(edward.nombre);
 
-// edward.nombre = 'Sebas';
-// console.log(edward.nombre);
+edward.nombre = 'Sebas';
+console.log(edward.nombre);
 
 class Punto {
     constructor ( x , y ){
@@ -99,3 +99,13 @@ class Punto {
   const p1 = new Punto(20, 20);
   const p2 = new Punto(14, 14);
   console.log (Punto.distancia(p1, p2));
+
+
+class estudiante extends Persona {
+    getnom(){
+        console.log("Mi nombre es: " + this.nombre);
+    }
+}
+var estudiante1 = new estudiante("Isaac");
+estudiante1.getnom();
+
