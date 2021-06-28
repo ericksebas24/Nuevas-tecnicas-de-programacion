@@ -4,10 +4,14 @@ const express = require('express');
 
 const app = express()
 // routes
-const { RouterIndex } = require('./routes/index')
+const { RouterIndex } = require('./routes/index');
+
 app.use("/", RouterIndex)
-app.use("/user", RouterIndex)
-app.use("/user/data", RouterIndex)
+app.use("/deber-video", RouterIndex)
+// app.use("/users", RouterIndex)
+// app.use("/users-query/:id", RouterIndex)
+// app.use("/users-params/:last_name", RouterIndex)
+// app.use("/users/data", RouterIndex)
 
 /*
         "/"+"/"="//" => "/"

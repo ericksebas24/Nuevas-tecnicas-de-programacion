@@ -1,35 +1,64 @@
 //traemos el paquete
 
 const { Router } = require('express');
+const data = require('../MOCK_DATA.json')
+
+
 
 //inicializamos el router
 
-const router = Router()
+const router = Router();
 
-//creacion de los endpoint
 router
-    .get("/",(req, res) => {
-    res.send("Hola mundo con ExpressJS");
-    })
-    .get("/saludo",(req, res) =>{
+.get("/users", (req, res) => {
+    res.json({
+        msg: "Lista de usuarios",
+        body: data,
+        
+    });
+    
+var modifiedData = data.map((person)=>{
+    person.first_name = person.first_name.toUpperCase();
+    person.last_name = person.last_name.toUpperCase();
+    return person
+})
+})
 
-        const { query: {nombre, apellido} } = req;
+.get("/users-query/", (req, res) => {
+    const { query: {id} } = req;
+    var fil = data.find(user => user.id === parseInt(id))
+    if (fil) {
         res.json({
-            saludo: `Hola soy ${nombre} ${apellido}`,
+            msg: "Filtrado por ID",
+            body: fil
         });
-    })
-    .get('/saludo/:nombre', (req, res) =>{
-        const { params: { nombre } } = req
-        console.log(req.params);
+    } else {
         res.json({
-            nombre: nombre,
-        })
-    })
+            msg: "Dato inexistente",
+            body: data,
+        });
+    }
+})
 
+.get("/users-params/:last_name", (req, res) => {
+const { params:{last_name}} = req;
+var ap = data.find(a => a.last_name === last_name)
+if(ap){
+    res.json({
+        msg: "Filtrado por Apellido",
+        body: [`${ap.email}`],
+    });
+}else{
+    res.json({
+        msg: "Dato inexistente",
+        body: [null]
+    })
+}
+})
 
 
 //exportamos la rutas
-module.exports.RouterIndex = router
+module.exports.RouterIndex = router;
 
 // module = {
 //     exports: {

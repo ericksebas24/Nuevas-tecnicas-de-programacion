@@ -10,4 +10,4 @@
 // Valores de tipo objeto 
 [1, 2, 3]
 ["Gabriel", 23, 21.3, {}]
-{ nombre: "Gabriel", edad ; 27, ocupacion: "Analista" }
+{ nombre: "Gabriel", edad ; 27, ocupacion; "Analista" }
