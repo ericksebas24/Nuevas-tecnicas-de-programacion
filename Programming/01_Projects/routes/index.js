@@ -1,64 +1,45 @@
-//traemos el paquete
-
+//Traer el paquete
 const { Router } = require('express');
-const data = require('../MOCK_DATA.json')
-
-
-
-//inicializamos el router
-
-const router = Router();
-
+const { DataValidator }= require('../middlewares/DataValidator')
+//inicializar el router
+const router = Router()
+//Crear los Endpoint
 router
-.get("/users", (req, res) => {
+    .get("/",DataValidator,(req, res) => {
+    res.send(req.pruebaDelMiddleware);
+    })
+
+    .get("/users", (req, res) => {
     res.json({
         msg: "Lista de usuarios",
         body: data,
         
     });
-    
-var modifiedData = data.map((person)=>{
-    person.first_name = person.first_name.toUpperCase();
-    person.last_name = person.last_name.toUpperCase();
-    return person
-})
 })
 
-.get("/users-query/", (req, res) => {
-    const { query: {id} } = req;
-    var fil = data.find(user => user.id === parseInt(id))
-    if (fil) {
-        res.json({
-            msg: "Filtrado por ID",
-            body: fil
-        });
-    } else {
-        res.json({
-            msg: "Dato inexistente",
-            body: data,
-        });
-    }
-})
+    .get("/saludo", datavalidator("query", User),(req, res) =>{
 
-.get("/users-params/:last_name", (req, res) => {
-const { params:{last_name}} = req;
-var ap = data.find(a => a.last_name === last_name)
-if(ap){
-    res.json({
-        msg: "Filtrado por Apellido",
-        body: [`${ap.email}`],
-    });
-}else{
-    res.json({
-        msg: "Dato inexistente",
-        body: [null]
+        const { query: {nombre, apellido} } = req;
+        res.json({
+            saludo: `Hola soy ${nombre} ${apellido}`,
+        });
     })
-}
-})
+    .get("/saludo",(req, res) =>{
 
-
-//exportamos la rutas
-module.exports.RouterIndex = router;
+        const { query: {nombre, apellido} } = req;
+        res.json({
+            saludo: `Hola soy ${nombre} ${apellido}`,
+        });
+    })
+    .get('/saludo/:nombre', (req, res) =>{
+        const { params: { nombre } } = req
+        console.log(req.params);
+        res.json({
+            nombre: params.nombre,
+        })
+    })
+//Exportar las Rutas
+module.exports.RouterIndex = router
 
 // module = {
 //     exports: {
